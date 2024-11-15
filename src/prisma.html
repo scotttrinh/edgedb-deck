@@ -269,21 +269,23 @@ filter "Zendaya" in .actors.name
               data-src="deck/850433d118fce519871cd6c82e89ef02.svg"></div>
         </div>
         <div class="sl-block" data-block-type="code" data-name="code-7c5d19"
-          style="width: 415.475px; height: 225px; left: 64.525px; top: 186px;"
+          style="width: 415.475px; height: 260px; left: 64.525px; top: 186px;"
           data-block-id="b9ab091e4c42d4788127c8db6b0f91f7">
           <div class="sl-block-content notranslate" data-highlight-theme="monokai" data-code-frame="none"
             style="z-index: 21;">
-            <pre style="font-size: 16px; line-height: 19px; tab-size: 4;" class="sql"><code data-line-numbers="">select 
-  Movie {
-    title,
-    actors: {
-      name
-    } order by @credits_order limit 5,
-    rating := math::mean(.reviews.score) 
-  }
-filter "Zendaya" in .actors.name
-  
-  </code></pre>
+            <pre style="font-size: 13px; line-height: 19px; tab-size: 4;" class="typescript"><code data-line-numbers="">e.select(
+  e.Movie, (movie) =&gt; ({
+    title: true,
+    rating: e.math.mean(movie.reviews.score),
+    actors: (actor) =&gt; ({
+      name: true,
+      order_by: actor["@credits_order"],
+      limit: 5,
+    }),
+    filter:
+      e.op("Zendaya", "in", movie.actors.name)
+  })
+)</code></pre>
           </div>
         </div>
         <div class="sl-block" data-block-type="code"
