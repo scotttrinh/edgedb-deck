@@ -10,6 +10,7 @@ export default {
         prisma: "./src/prisma.html",
         perf: "./src/perf.html",
         schema: "./src/schema.html",
+        ui: "./src/ui.html",
       },
     },
   },
